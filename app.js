@@ -1,25 +1,9 @@
 const express = require('express');
-const mysql2 = require("mysql2")
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 
 const app = express();
 
 dotenv.config({ path: './.env'})
-
-const db = mysql2.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
-})
-
-db.connect((error) => {
-    if(error) {
-        console.log(error)
-    } else {
-        console.log("MySQL connected!")
-    }
-})
 
 app.set('view engine', 'hbs')
 
@@ -56,11 +40,14 @@ app.post("/auth/register", (req, res) => {
 app.post("/auth/login", (req, res) => {
     const { name, password } = req.body
     console.log("Login Initiated")
+    const BACKEND_URL = process.env.BACKEND_URL
+
+    console.log(`${BACKEND_URL}/login/verify`)
 
     return axios(
     {
         method: 'POST',
-        url: 'http://localhost:8080/login/verify',
+        url: `${BACKEND_URL}/login/verify` ,
         headers: {
             "Content-type": "application/json"
         },
