@@ -72,12 +72,12 @@ app.post("/auth/login", (req, res) => {
         if (error.response) {
           console.log('Login failed with status: ', error);
           return res.render('login', {
-            message: 'Login failed : '
+            message: 'Login Failed with status :'+ error.request?.status
           })
         }else {
           console.log('Login failed with error: ', error);
           return res.render('login', {
-            message: 'Login failed : '
+            message: 'Login Failed with error: ' + error
           })
         }
     });
