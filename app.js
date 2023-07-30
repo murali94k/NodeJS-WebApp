@@ -70,7 +70,7 @@ app.post("/auth/login", (req, res) => {
     })
     .catch(function(error) {
         if (error.response) {
-          console.log('Login failed with status: ', error.request?.status);
+          console.log('Login failed with status: ', error);
           return res.render('login', {
             message: 'Login failed : '
           })
